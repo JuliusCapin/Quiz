@@ -10,10 +10,17 @@
     <div class="card">
         <h1>Select difficulty</h1>
         <div class="but">
-            <button onclick="location.href = 'problem.html'">Easy</button>
-            <button onclick="location.href = 'problem.html'">Medium</button>
-            <button onclick="location.href = 'problem.html'">Hard</button>
+            <button onclick="setDifficulty('easy')">Easy</button>
+            <button onclick="setDifficulty('medium')">Medium</button>
+            <button onclick="setDifficulty('hard')">Hard</button>
         </div>
     </div>
+
 </body>
+    <script>
+function setDifficulty(level) {
+    localStorage.setItem("difficulty", level);
+    window.location.href = "problem.html";
+}
+</script>
 </html>
