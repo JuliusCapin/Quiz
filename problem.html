@@ -126,7 +126,7 @@
 </div>
 
 <script>
-    const difficulty = localStorage.getItem("difficulty") || "hard";
+    const difficulty = localStorage.getItem("difficulty");
 
 
     const selectedQuiz =[];
@@ -139,13 +139,19 @@
     const buttons = document.querySelectorAll(".but button");
 
     fetch("quiz.json")
-        .then(response => response.json())
-        .then(data => {
-            selectedQuiz.push(...data[difficulty]);
-            loadQuestion();
-        })
-        .catch(error => console.error("Error loading quiz data:", error));
+    .then(res => res.json())
+    .then(data => {
 
+        if (!difficulty || !data[difficulty]) {
+            alert("No difficulty selected!");
+            window.location.href = "difficulty.html";
+            return;
+        }
+
+        selectedQuiz = data[difficulty];
+        loadQuestion();
+    })
+    .catch(err => console.error(err));
     function loadQuestion() {
         const current = selectedQuiz[currentQuestion];
 
